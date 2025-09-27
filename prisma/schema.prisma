@@ -16,10 +16,11 @@ datasource db {
 
 model Client {
   id         Int      @id @default(autoincrement())
-  internalId Int      @unique
+  internalId String   @unique
   name       String
   email      String   @unique
-  date       DateTime @default(now())
+  date       DateTime 
+  createdAt  DateTime @default(now())
 }
 
 model User {

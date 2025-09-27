@@ -1,5 +1,5 @@
 export type TClient = {
-    internalId: number;
+    internalId: string;
     name: string;
     email: string;
     date: Date;

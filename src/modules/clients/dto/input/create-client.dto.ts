@@ -2,8 +2,8 @@ import { IsDate, IsEmail, IsInt, IsString } from 'class-validator';
 import { Transform } from 'class-transformer';
 
 export class CreateClientDTO {
-    @IsInt()
-    internalId: number;
+    @IsString()
+    internalId: string;
 
     @IsString()
     name: string;
