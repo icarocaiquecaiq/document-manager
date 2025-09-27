@@ -1,15 +1,15 @@
 import { Body, Controller, HttpStatus, Param, ParseFilePipeBuilder, ParseIntPipe, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
-import { DocumentScraplingService } from '../services/document-scrapling.service';
-import { extractWebSiteDataDTO } from '../dto/input/extract-website-document.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { WebsiteInvoiceScraperDTO } from '../dto/input/website-invoice-scraper.dto';
+import { InvoiceScraperService } from '../services/invoice-scraper.service';
 
-@Controller('document')
-export class DocumentScraplingController {
-    constructor(private readonly documentService: DocumentScraplingService) {}
+@Controller('invoice')
+export class InvoiceScraperController {
+    constructor(private readonly invoiceScraperService: InvoiceScraperService) {}
 
     @Post('client/:id/website')
-    async addScrapedWebSiteToClient(@Body() extractWebSite: extractWebSiteDataDTO) {
-        return this.documentService.extractWebSiteData(extractWebSite);
+    async addScrapedWebSiteToClient(@Body() websiteInvoiceScraper: WebsiteInvoiceScraperDTO, @Param('id', ParseIntPipe) id: number) {
+        return this.invoiceScraperService.scrapWebSiteData({ clientId: id, url: websiteInvoiceScraper.url });
     }
 
     @Post('client/:id/pdf')
@@ -24,6 +24,6 @@ export class DocumentScraplingController {
         file: Express.Multer.File,
         @Param('id', ParseIntPipe) id: number,
     ) {
-        return this.documentService.extractPdfData(id, file);
+        return this.invoiceScraperService.scrapPdfData({ clientId: id, file });
     }
 }

@@ -13,14 +13,15 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-
 model Client {
-  id         Int      @id @default(autoincrement())
-  internalId String   @unique
+  id         Int       @id @default(autoincrement())
+  internalId String    @unique
   name       String
-  email      String   @unique
-  date       DateTime 
-  createdAt  DateTime @default(now())
+  email      String    @unique
+  date       DateTime
+  createdAt  DateTime  @default(now())
+  
+  invoices   Invoice[]
 }
 
 model User {
@@ -28,3 +29,30 @@ model User {
   email    String @unique
   password String
 }
+
+model Invoice {
+  id                    Int           @id @default(autoincrement())
+  title                 String        @unique
+  monetaryValue         Decimal?       
+  invoiceExpiresDate    DateTime?
+  invoiceReferenceMonth DateTime?
+  issuerCnpj            String?      
+  invoiceId             String?        
+  postalCode            String?
+  address               String?
+  neighborhood          String?
+  invoiceStatus         InvoiceStatus
+  
+  clientId              Int
+  client                Client        @relation(fields: [clientId], references: [id])
+
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+}
+
+enum InvoiceStatus {
+  PAID
+  UNPAID
+}
+
+

@@ -3,11 +3,11 @@ import { ClientService } from './client.service';
 import { CreateClientDTO } from './dto/input/create-client.dto';
 import { UpdateClientDTO } from './dto/input/update-client.dto';
 
-@Controller('clients')
+@Controller('client')
 export class ClientController {
     constructor(private readonly clientService: ClientService) {}
 
-    @Get()
+    @Get('get-all')
     @UsePipes(new ValidationPipe({ transform: true }))
     getAllClients() {
         return this.clientService.getAllClients();
