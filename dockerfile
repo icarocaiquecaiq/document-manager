@@ -36,12 +36,18 @@ COPY package*.json ./
 
 RUN npm install --only=production
 
+# Instala http-server globalmente
+RUN npm install -g http-server
+
 COPY --from=builder /usr/src/app/prisma ./prisma
 COPY --from=builder /usr/src/app/generated ./generated
-
 COPY --from=builder /usr/src/app/dist ./dist
 
-EXPOSE 3000
+# Copia a pasta test/fixtures/html para o container
+COPY test/fixtures/html ./test/fixtures/html
 
-# Executa comandos diretamente no CMD usando sh
-CMD ["sh", "-c", "echo 'aguardando mysql...' && while ! nc -z mysql 3306; do sleep 1; done && echo 'MySQL conectado!' && echo 'Criando tabelas no banco...' && npx prisma db push --accept-data-loss && echo 'Banco configurado! Iniciando aplicação...' && node dist/main"]
+EXPOSE 3000
+EXPOSE 8080
+
+# Executa ambos os serviços simultaneamente usando &
+CMD ["sh", "-c", "echo ' Aguardando MySQL...' && while ! nc -z mysql 3306; do sleep 1; done && echo ' MySQL conectado!' && echo ' Criando tabelas no banco...' && npx prisma db push --accept-data-loss && echo ' Banco configurado!' && echo ' Iniciando servidor HTTP na porta 8080...' && http-server test/fixtures/html -p 8080 --cors -c-1 & echo ' Iniciando aplicação principal...' && node dist/main"]
