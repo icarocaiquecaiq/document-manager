@@ -5,7 +5,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class InvoiceService {
     constructor(private readonly prisma: PrismaService) {}
 
-    private readonly MESSAGE_DOCUMENT_NO_CLIENT = 'Ivoice not found';
+    private readonly MESSAGE_DOCUMENT_NO_CLIENT = 'Invoice not found';
     private readonly MESSAGE_CLIENT_NOT_FOUND = 'Client not found';
 
     async getInvoiceById(id: number) {
