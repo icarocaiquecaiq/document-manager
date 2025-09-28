@@ -37,10 +37,11 @@ model Invoice {
   invoiceExpiresDate    DateTime?
   invoiceReferenceMonth DateTime?
   issuerCnpj            String?      
-  invoiceId             String?        
+  invoiceId             String?       @unique      
   postalCode            String?
   address               String?
   neighborhood          String?
+  paidInvoiceDate       DateTime?         
   invoiceStatus         InvoiceStatus
   
   clientId              Int

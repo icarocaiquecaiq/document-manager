@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { IDocumentParser } from './document-parser.interface';
-import { IScrapedData, IScrapedPdfData } from '../invoice.types';
+import { IScrapedData } from '../invoice.types';
+import { findMatch, formatCurrencyToNumber } from '../utils/parsing.helpers';
 
 type TExtractionRule = {
-    fieldName: keyof IScrapedPdfData;
+    fieldName: keyof IScrapedData;
     patterns: RegExp[];
     formatter: (match: RegExpMatchArray) => any;
     errorMessage: string;
@@ -15,7 +16,7 @@ export class PdfDocumentParser implements IDocumentParser {
         {
             fieldName: 'monetaryValue',
             patterns: [/(?:TOTAL A PAGAR\s*R\$\s*([\d\.,]+))|(?:\d{2}\/\d{2}\/\d{4}R\$\s*([\d\.,]+))/i],
-            formatter: (match) => this.formatCurrencyToNumber(match[1] || match[2]),
+            formatter: (match) => formatCurrencyToNumber(match[1] || match[2]),
             errorMessage: 'Error extracting monetary value',
         },
         {
@@ -38,7 +39,7 @@ export class PdfDocumentParser implements IDocumentParser {
         },
         {
             fieldName: 'invoiceId',
-            patterns: [/(FAT-[\d\.-]+)/],
+            patterns: [/FAT-\d{2}-([\d]+)\./],
             formatter: (match) => match[1],
             errorMessage: 'Error extracting invoice ID',
         },
@@ -71,7 +72,7 @@ export class PdfDocumentParser implements IDocumentParser {
 
         for (const rule of this.rules) {
             try {
-                const match = this.findMatch(textContent, rule.patterns);
+                const match = findMatch(textContent, rule.patterns);
                 if (match) {
                     extractedData[rule.fieldName] = rule.formatter(match);
                 }
@@ -91,19 +92,5 @@ export class PdfDocumentParser implements IDocumentParser {
         }
 
         return extractedData;
-    }
-
-    private findMatch(text: string, patterns: RegExp[]): RegExpMatchArray | null {
-        for (const pattern of patterns) {
-            const match = text.match(pattern);
-            if (match) return match;
-        }
-        return null;
-    }
-
-    private formatCurrencyToNumber(currencyString: string | null): number | null {
-        if (!currencyString) return null;
-        const sanitizedValue = currencyString.trim().replace(/\./g, '').replace(',', '.');
-        return parseFloat(sanitizedValue);
     }
 }

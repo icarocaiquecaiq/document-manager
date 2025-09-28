@@ -1,0 +1,210 @@
+<html lang="pt-BR">
+    <script
+        type="text/javascript"
+        async=""
+        src="https://cdn.signal.asaas.com/analytics.js/v1/8e4l0kg3wg/analytics.min.js"
+        integrity="sha384-xZr5K9oX5LsRPJbfBnYKrFLcz+k3842p+zsxjeyo5it4IVN2o4EWCKkJDoTiWvfA"
+        crossorigin="anonymous"
+    ></script>
+    <head>
+        <title>Comprovante de pagamento</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <meta name="robots" content="noindex, nofollow" />
+
+        <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon-14e590c1a04095a343f34c60b0456560.ico" />
+        <link rel="stylesheet" href="/assets/basic-resources-material-746a08bc274e2dfe10e29c6960769ebf.css" />
+        <link rel="stylesheet" href="/assets/transactionReceipt/transactionReceipt-e9827ef5f9a74bb30c7f0dca9b89bba3.css" />
+        <link rel="stylesheet" href="/assets/atlasIconsCore-e8ab849feb7bcdf3e6119f640f52d721.css" />
+    </head>
+    <body>
+        <input type="hidden" class="js-current-environment" value="production" />
+
+        <script nonce="" defer="">
+            // Snippet do Segment não minificado - https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/quickstart/#step-2-copy-the-segment-snippet
+            (function () {
+                // Create a queue, but don't obliterate an existing one!
+                var analytics = (window.analytics = window.analytics || []);
+                // If the real analytics.js is already on the page return.
+                if (analytics.initialize) return;
+                // If the snippet was invoked already show an error.
+                if (analytics.invoked) {
+                    if (window.console && console.error) {
+                        console.error('Segment snippet included twice.');
+                    }
+                    return;
+                }
+                // Invoked flag, to make sure the snippet
+                // is never invoked twice.
+                analytics.invoked = true;
+                // A list of the methods in Analytics.js to stub.
+                analytics.methods = [
+                    'trackSubmit',
+                    'trackClick',
+                    'trackLink',
+                    'trackForm',
+                    'pageview',
+                    'identify',
+                    'reset',
+                    'group',
+                    'track',
+                    'ready',
+                    'alias',
+                    'debug',
+                    'page',
+                    'once',
+                    'off',
+                    'on',
+                    'addSourceMiddleware',
+                    'addIntegrationMiddleware',
+                    'setAnonymousId',
+                    'addDestinationMiddleware',
+                ];
+                // Define a factory to create stubs. These are placeholders
+                // for methods in Analytics.js so that you never have to wait
+                // for it to load to actually record data. The `method` is
+                // stored as the first argument, so we can replay the data.
+                analytics.factory = function (method) {
+                    return function () {
+                        var args = Array.prototype.slice.call(arguments);
+                        args.unshift(method);
+                        analytics.push(args);
+                        return analytics;
+                    };
+                };
+                // For each of our methods, generate a queueing stub.
+                for (var i = 0; i < analytics.methods.length; i++) {
+                    var key = analytics.methods[i];
+                    analytics[key] = analytics.factory(key);
+                }
+                // Define a method to load Analytics.js from our CDN,
+                // and that will be sure to only ever load it once.
+                analytics.load = function (key, options) {
+                    // Create an async script element based on your key.
+                    var script = document.createElement('script');
+                    script.type = 'text/javascript';
+                    script.async = true;
+                    script.src = 'https://cdn.signal.asaas.com/analytics.js/v1/8e4l0kg3wg/analytics.min.js';
+                    script.integrity = 'sha384-xZr5K9oX5LsRPJbfBnYKrFLcz+k3842p+zsxjeyo5it4IVN2o4EWCKkJDoTiWvfA';
+                    script.crossOrigin = 'anonymous';
+                    // Insert our script next to the first script element.
+                    var first = document.getElementsByTagName('script')[0];
+                    first.parentNode.insertBefore(script, first);
+                    analytics._loadOptions = options;
+                };
+                analytics._writeKey = '8e4l0kg3wg';
+                // Add a version to keep track of what's in the wild.
+                analytics.SNIPPET_VERSION = '4.13.2';
+
+                // Load Analytics.js with your key, which will automatically
+                // load the tools you've enabled for your account. Boosh!
+                analytics.load('8e4l0kg3wg', {
+                    integrations: {
+                        'Segment.io': {
+                            // Do not change! apiHost will revert to api.segment.io
+                            apiHost: 'signal.asaas.com/com.segment/v1',
+                        },
+                    },
+                });
+
+                // Make the first page call to load the integrations. If
+                // you'd like to manually name or tag the page, edit or
+                // move this call however you'd like.
+                if (true) {
+                    analytics.page(null, null, {
+                        asaasSource: 'asaas',
+                        environment: 'production',
+                    });
+                }
+            })();
+        </script>
+
+        <script type="text/javascript" src="/assets/jquery-5d2be63fc281b177d9eee2f8e8b90d28.js"></script>
+
+        <link rel="stylesheet" href="/assets/main/blue-root-colors-28d6588bc3372aa9be11c3f06e7ca158.css" />
+
+        <div class="center">
+            <div id="transaction-receipt-container">
+                <div id="loading-backdrop" style="display: none">
+                    <div class="box-loading"><img src="/assets/loading-7b9776076d5fceef4993b55c9383dedd.gif" /> Aguarde</div>
+                </div>
+
+                <div class="box-header">
+                    <div class="box-content-left is-customer-header">
+                        <ul style="max-width: none">
+                            <li>Bruce Allen Cueb</li>
+
+                            <li>englishGo@gmail.com</li>
+
+                            <li>(XX) XXXXX-0702</li>
+                        </ul>
+                    </div>
+
+                    <div class="box-content-right is-customer-header">
+                        <div class="box-transaction-receipt-type">
+                            <div data-testid="e2e-transaction-receipt-header-title" class="title fbold">Comprovante de pagamento</div>
+                            gerado em 27/09/2025 às 18:22
+                        </div>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+
+                <div class="box-info">
+                    <div class="pad-16">
+                        <div class="control-group"><label>Forma de pagamento:</label> Pix</div>
+
+                        <div class="control-group">
+                            <label> Valor pago: </label>
+                            R$ 65,00
+                        </div>
+
+                        <div class="control-group"><label>Data do vencimento:</label> 22/08/2025</div>
+
+                        <div class="control-group">
+                            <label>Data do pagamento:</label>
+
+                            22/08/2025 às 20:42:33
+                        </div>
+
+                        <div class="control-group"><label>ID/Transação Pix:</label> 222342s04d1ea9093</div>
+
+                        <hr />
+
+                        <div class="control-group">
+                            <label>Dados do pagador</label>
+                        </div>
+
+                        <div class="control-group"><label>Nome:</label> José Malfaro</div>
+
+                        <div class="control-group"><label>CPF/CNPJ:</label> ***.669.927-**</div>
+
+                        <div class="control-group"><label>Instituição:</label> NU PAGAMENTOS S.A. - INSTITUIÇÃO DE PAGAMENTO</div>
+
+                        <hr />
+
+                        <div class="control-group">
+                            <label>Dados do recebedor</label>
+                        </div>
+
+                        <div class="control-group"><label>Nome:</label> Bruce Allen Cueb</div>
+
+                        <div class="control-group"><label>CPF/CNPJ:</label> ***.582.858-**</div>
+
+                        <div class="control-group"><label>Instituição:</label> ASAAS GESTÃO FINANCEIRA INSTITUIÇÃO DE PAGAMENTO S.A.</div>
+                    </div>
+                </div>
+
+                <div class="box-footer">
+                    <div class="pad-8">Este documento e cobrança não possuem valor fiscal e são de responsabilidade única e exclusiva de Bruce</div>
+
+                    <hr />
+                    <div class="pad-8">Esta cobrança é intermediada por Asaas.com - eleve a gestão financeira da sua empresa</div>
+                </div>
+            </div>
+            <div class="download-button-container">
+                <a class="mdl-button primary-button" href="/transactionReceipt/pdf/0981390860492014">Baixar pdf</a>
+            </div>
+        </div>
+    </body>
+</html>

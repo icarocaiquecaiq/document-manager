@@ -23,5 +23,5 @@ export interface IScrapedData {
     invoiceStatus: 'PAID' | null;
     invoiceReferenceMonth: Date | null;
     title: string | null;
+    paidInvoiceDate: Date | null;
 }
-export interface IScrapedPdfData extends IScrapedData {}
