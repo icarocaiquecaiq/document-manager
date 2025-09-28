@@ -10,10 +10,10 @@ export class ClientController {
     @Get('get-all')
     @UsePipes(new ValidationPipe({ transform: true }))
     getAllClients(
-        @Query('withDocumentCount', new ParseBoolPipe({ optional: true }))
-        withDocumentCount?: boolean,
+        @Query('withInvoiceCount', new ParseBoolPipe({ optional: true }))
+        withInvoiceCount?: boolean,
     ) {
-        return this.clientService.getAllClients(!!withDocumentCount);
+        return this.clientService.getAllClients(!!withInvoiceCount);
     }
 
     @Get(':id')

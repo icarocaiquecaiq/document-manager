@@ -16,9 +16,9 @@ export class ClientService {
     private readonly MESSAGE_CLIENT_UPDATE_ERROR = 'Error updating client';
     private readonly MESSAGE_CLIENT_DELETE_ERROR = 'Error deleting client';
 
-    async getAllClients(withDocumentCount: boolean) {
+    async getAllClients(withInvoiceCount: boolean) {
         try {
-            if (!withDocumentCount) {
+            if (!withInvoiceCount) {
                 const clients = await this.prisma.client.findMany();
 
                 if (!clients) {
