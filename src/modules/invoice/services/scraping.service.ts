@@ -26,13 +26,14 @@ export class ScrapingService {
             throw new BadRequestException(`Domain '${domain}' is not supported.`);
         }
 
-        if (process.env.ENVIROMENT === 'dev' && localTestUrlMap[domain]) {
+        if (localTestUrlMap[domain]) {
             console.log(`[DEV MODE] Rerouting ${targetUrl} to ${localTestUrlMap[domain]}`);
             urlToFetch = localTestUrlMap[domain];
         }
 
         const parser = this.parserFactory.getParserForDomain(domain);
 
+        console.log(process.env.ENVIRONMENT, localTestUrlMap[domain]);
         console.log(`Fetching content from: ${urlToFetch}`);
 
         const response = await apiClientHttp.get(urlToFetch);
