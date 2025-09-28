@@ -7,6 +7,7 @@ import { PrismaClientKnownRequestError } from 'generated/prisma/runtime/library'
 export class ClientService {
     constructor(private readonly prisma: PrismaService) {}
 
+    private readonly MESSAGE_CLIENT_EMPTY = 'There is no client';
     private readonly MESSAGE_CLIENT_NOT_FOUND = 'Client not found';
     private readonly MESSAGE_CLIENT_GET_ALL_ERROR = 'Error fetching clients';
     private readonly MESSAGE_CLIENT_GET_BY_ID_ERROR = 'Error fetching client by ID';
@@ -15,15 +16,27 @@ export class ClientService {
     private readonly MESSAGE_CLIENT_UPDATE_ERROR = 'Error updating client';
     private readonly MESSAGE_CLIENT_DELETE_ERROR = 'Error deleting client';
 
-    async getAllClients() {
+    async getAllClients(withDocumentCount: boolean) {
         try {
-            const clients = await this.prisma.client.findMany();
+            if (!withDocumentCount) {
+                const clients = await this.prisma.client.findMany();
 
-            if (!clients) {
-                throw new NotFoundException(this.MESSAGE_CLIENT_NOT_FOUND);
+                if (!clients) {
+                    throw new NotFoundException(this.MESSAGE_CLIENT_EMPTY);
+                }
+
+                return clients;
             }
-
-            return clients;
+            const clientsWithCount = await this.prisma.client.findMany({
+                include: {
+                    _count: {
+                        select: {
+                            invoices: true,
+                        },
+                    },
+                },
+            });
+            return clientsWithCount;
         } catch (e) {
             throw new InternalServerErrorException(this.MESSAGE_CLIENT_GET_ALL_ERROR, 'error: ' + e);
         }

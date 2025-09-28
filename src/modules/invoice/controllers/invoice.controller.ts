@@ -9,4 +9,9 @@ export class InvoiceController {
     async getInvoiceById(@Param('id', ParseIntPipe) id: number) {
         return this.invoiceService.getInvoiceById(id);
     }
+
+    @Get('client/:clientId')
+    async getInvoicesByClientId(@Param('clientId', ParseIntPipe) clientId: number) {
+        return this.invoiceService.getInvoicesByClientId(clientId);
+    }
 }
